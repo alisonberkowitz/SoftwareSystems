@@ -22,6 +22,7 @@ char *tracks[] = {
 */
 char *strjoin(char *array[], int n)
 {
+    //finding the size to allocate
     int size = 0;
     int k;
     for (k=0; k<n; k++)
