@@ -16,10 +16,32 @@ License: Creative Commons Attribution-ShareAlike 3.0
 // For example, if s is allen, n is 10 and fillchar is .
 // the result is ..allen... 
 
-char *center(char *s, int n, char fillchar)
+char *center(const char *s, int n, char fillchar)
 {
-    // FILL THIS IN
-    //    return NULL;
+    char *word, *dest;
+    word = (char *) malloc(sizeof(char)*(n+1));
+    strcpy(word, &fillchar);
+    dest = word;
+
+    int start;
+    start = n/2 - strlen(s)/2;
+
+    int i;
+    for (i=1; i<start; i++)
+    {
+        strcat(word, &fillchar);
+    }
+
+    strcat(word,s);
+
+    int k;
+    for(k=strlen(word); k<n+1; k++)
+    {
+        strcat(word, &fillchar);
+    }
+
+    return word;
+
 }
 
 
