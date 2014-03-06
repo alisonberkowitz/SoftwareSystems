@@ -17,7 +17,7 @@ def read_file(filename):
     return t
 
 def main(script, filename='data'):
-    t = read_file(filename)
+    t = read_file('numbers.txt')
     cdf = thinkstats2.MakeCdfFromList(t)
     thinkplot.Cdf(cdf)
     thinkplot.Show()
