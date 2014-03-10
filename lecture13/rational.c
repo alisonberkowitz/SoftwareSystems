@@ -30,6 +30,10 @@ double rational_to_double(Rational *rational) {
 Rational *mult_rational(Rational *r1, Rational *r2) {
     int nums = (r1->numer)*(r2->numer);
     int dens = (r1->denom)*(r2->denom);
+    if (dens%nums == 0){
+        nums = 1;
+        dens = dens/nums;
+    }
     Rational *r = make_rational(nums,dens);
     return r;
 }
