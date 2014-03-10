@@ -13,6 +13,10 @@ typedef struct {
 // If unable to allocate, prints an error message and exits.
 Rational *make_rational(int numer, int denom) {
     Rational *r = malloc(sizeof(Rational));
+    if (r == NULL) {
+        printf("%s\n", "malloc failed");
+        exit(-1);
+    }
     r->numer = numer;
     r->denom = denom;
     return r;
