@@ -133,7 +133,9 @@ int hash_hashable(Hashable *hashable)
 /* Compares integers. */
 int equal_int (void *ip, void *jp)
 {
-    // FIX ME!
+    if (ip == jp) {
+        return 1;
+    }
     return 0;
 }
 
@@ -141,7 +143,9 @@ int equal_int (void *ip, void *jp)
 /* Compares strings. */
 int equal_string (void *s1, void *s2)
 {
-    // FIX ME!
+    if (strcmp(s1,s2)==0) {
+        return 1;
+    }
     return 0;
 }
 
@@ -149,7 +153,9 @@ int equal_string (void *s1, void *s2)
 /* Compares Hashables. */
 int equal_hashable(Hashable *h1, Hashable *h2)
 {
-    // FIX ME!
+    if (h1->key == h2->key){
+        return 1;
+    }
     return 0;
 }
 
@@ -189,8 +195,11 @@ typedef struct node {
 /* Makes a Node. */
 Node *make_node(Hashable *key, Value *value, Node *next)
 {
-    // FIX ME!
-    return NULL;
+    Node *node = (Node *) malloc (sizeof (Node));
+    node->key = key;
+    node->value = value;
+    node->next = next;
+    return node;
 }
 
 
@@ -206,7 +215,11 @@ void print_node(Node *node)
 /* Prints all the Nodes in a list. */
 void print_list(Node *node)
 {
-    // FIX ME!
+    print_node(node);
+    while (node->next) {
+        node = node->next;
+        print_node(node);
+    }
 }
 
 
@@ -223,7 +236,15 @@ Node *prepend(Hashable *key, Value *value, Node *rest)
 /* Looks up a key and returns the corresponding value, or NULL */
 Value *list_lookup(Node *list, Hashable *key)
 {
-    // FIX ME!
+    if (list->key == key){
+            return list->value;
+        }
+    while(list->next) {
+        list = list->next;
+        if (list->key == key){
+            return list->value;
+        }
+    }
     return NULL;
 }
 
@@ -239,8 +260,15 @@ typedef struct map {
 /* Makes a Map with n lists. */
 Map *make_map(int n)
 {
-    // FIX ME!
-    return NULL;
+    Map *map = (Map *) malloc (sizeof (Map));
+    if (map == NULL) {
+        (void) fprintf(stderr, "can't malloc map");
+        exit(EXIT_FAILURE);
+    }
+    map->n = n;
+    map->lists = (Node **) malloc ((sizeof (Node)) * n);
+    //maybe make a linked list
+    return map;
 }
 
 
@@ -261,14 +289,32 @@ void print_map(Map *map)
 /* Adds a key-value pair to a map. */
 void map_add(Map *map, Hashable *key, Value *value)
 {
-    // FIX ME!
+    int hashValue = hash_hashable(key);
+    if(hashValue > 9){
+        hashValue=9;
+    }
+    if(map->lists[hashValue]) {
+        Node *checkNode = map->lists[hashValue];
+        while(checkNode->next){
+            checkNode = checkNode->next;
+        }
+        checkNode->next = make_node(key, value, NULL);
+    }else{
+        map->lists[hashValue] = make_node(key, value, NULL);
+    }
 }
 
 
 /* Looks up a key and returns the corresponding value, or NULL. */
 Value *map_lookup(Map *map, Hashable *key)
 {
-    // FIX ME!
+    int hashValue = hash_hashable(key);
+    if (hashValue > 9){
+        hashValue = 9;
+    }
+    if (map->lists[hashValue]){
+        return list_lookup(map->lists[hashValue],key);
+    }
     return NULL;
 }
 

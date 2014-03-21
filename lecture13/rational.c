@@ -14,7 +14,7 @@ typedef struct {
 Rational *make_rational(int numer, int denom) {
     Rational *r = malloc(sizeof(Rational));
     if (r == NULL) {
-        printf("%s\n", "malloc failed");
+        printf("%s\n", "malloc failed");    //i added this error check after time was up
         exit(-1);
     }
     r->numer = numer;
