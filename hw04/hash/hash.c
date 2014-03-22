@@ -290,8 +290,8 @@ void print_map(Map *map)
 void map_add(Map *map, Hashable *key, Value *value)
 {
     int hashValue = hash_hashable(key);
-    if(hashValue > 9){
-        hashValue=9;
+    if(hashValue > map->n - 1){
+        hashValue = hashValue % (map->n -1);
     }
     if(map->lists[hashValue]) {
         Node *checkNode = map->lists[hashValue];
@@ -309,8 +309,8 @@ void map_add(Map *map, Hashable *key, Value *value)
 Value *map_lookup(Map *map, Hashable *key)
 {
     int hashValue = hash_hashable(key);
-    if (hashValue > 9){
-        hashValue = 9;
+    if(hashValue > map->n - 1){
+        hashValue = hashValue % (map->n -1);
     }
     if (map->lists[hashValue]){
         return list_lookup(map->lists[hashValue],key);
