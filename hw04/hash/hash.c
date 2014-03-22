@@ -27,6 +27,10 @@ typedef struct {
 Value *make_int_value(int i) 
 {
     Value *value = (Value *) malloc (sizeof (Value));
+    if (value == NULL) {
+        (void) fprintf(stderr, "Failed to malloc value");
+        exit(EXIT_FAILURE);
+    }
     value->type = INT;
     value->i = i;
     return value;
@@ -37,6 +41,10 @@ Value *make_int_value(int i)
 Value *make_string_value(char *s) 
 {
     Value *value = (Value *) malloc (sizeof (Value));
+    if (value == NULL) {
+        (void) fprintf(stderr, "Failed to malloc value");
+        exit(EXIT_FAILURE);
+    }
     value->type = STRING;
     value->s = s;
     return value;
@@ -86,6 +94,10 @@ Hashable *make_hashable(void *key,
 			)
 {
     Hashable *hashable = (Hashable *) malloc (sizeof (Hashable));
+    if (hashable == NULL) {
+        (void) fprintf(stderr, "Failed to malloc hashable");
+        exit(EXIT_FAILURE);
+    }
     hashable->key = key;
     hashable->hash = hash;
     hashable->equal = equal;
@@ -196,6 +208,10 @@ typedef struct node {
 Node *make_node(Hashable *key, Value *value, Node *next)
 {
     Node *node = (Node *) malloc (sizeof (Node));
+    if (node == NULL) {
+        (void) fprintf(stderr, "Failed to malloc node");
+        exit(EXIT_FAILURE);
+    }
     node->key = key;
     node->value = value;
     node->next = next;
@@ -262,12 +278,15 @@ Map *make_map(int n)
 {
     Map *map = (Map *) malloc (sizeof (Map));
     if (map == NULL) {
-        (void) fprintf(stderr, "can't malloc map");
+        (void) fprintf(stderr, "Failed to malloc map");
         exit(EXIT_FAILURE);
     }
     map->n = n;
     map->lists = (Node **) malloc ((sizeof (Node)) * n);
-    //maybe make a linked list
+    if (map->lists == NULL) {
+        (void) fprintf(stderr, "Failed to malloc map lists");
+        exit(EXIT_FAILURE);
+    }
     return map;
 }
 
