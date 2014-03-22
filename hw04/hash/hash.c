@@ -133,7 +133,7 @@ int hash_hashable(Hashable *hashable)
 /* Compares integers. */
 int equal_int (void *ip, void *jp)
 {
-    if (ip == jp) {
+    if (ip-jp==0) {
         return 1;
     }
     return 0;
