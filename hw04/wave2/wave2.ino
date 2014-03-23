@@ -12,16 +12,19 @@
  
  */
  
+#include "Waveforms.h"
  
 int ledPin = 5;       // select the pin for the LED
 int buttonPin1 = 2;
 int buttonPin2 = 3;
+volatile int wave1 = 0;
 
 void setup() {
   Serial.begin(9600);
   
   pinMode(buttonPin1, INPUT_PULLUP);  
   pinMode(buttonPin2, INPUT_PULLUP);  
+  attachInterrupt(buttonPin2, wave1Select, RISING);  // Interrupt attached to the button connected to pin 3
 
   pinMode(ledPin, OUTPUT);
   
@@ -89,10 +92,17 @@ int low = 36;
 int high = 255;
 int stride = 5;
 int counter = low;
+int i = 0;
 
 void loop() {
   int button1 = digitalRead(buttonPin1);
   if (button1) return;
+  
+//  analogWrite(6, waveformsTable[wave1][i]);  // write the selected waveform
+
+  i++;
+  if(i == maxSamplesNum)  // Reset the counter to repeat the wave
+    i = 0;
   
   counter += stride;
   if (counter > high) {
@@ -102,4 +112,9 @@ void loop() {
 
   // write to the digital pins  
   writeByte(counter);
+}
+
+// function hooked to the interrupt on digital pin 3
+void wave1Select() {
+  wave1 = 0;
 }
