@@ -60,21 +60,34 @@ void push(Node **head, int val) {
 // of nodes removed.
 int remove_by_value(Node **head, int val) {
     Node *current = *head;
-    int count = 0;
 
-    while (current != NULL) {
-        if (current->val == val) {
-            pop(&current);
-            count = count + 1;
+    for (; current->next != NULL; current = current->next) {
+        if (current->next->val == val) {
+            Node *remove2 = current->next;
+            current->next = current->next->next;
+            free(remove2);
+            return 1;
         }
-        current = current->next;
     }
-    return count;
+    return 0;
 }
 
 // Reverse the elements of the list without allocating new nodes.
 void reverse(Node **head) {
-    // FILL THIS IN!
+    Node *prev = *head;
+    Node *cur = prev->next;
+    prev->next = NULL;
+
+    while (cur->next != NULL) {
+            Node *ne = cur->next;
+            cur->next = prev;
+
+            prev = cur;
+            cur = ne;
+    }
+    cur->next = prev;
+    *head = cur;
+
 }
 
 
