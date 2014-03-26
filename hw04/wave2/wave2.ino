@@ -39,18 +39,18 @@ void setup() {
   
 cli();//stop interrupts
 
-//set timer0 interrupt at 2kHz
-  TCCR0A = 0;// set entire TCCR0A register to 0
-  TCCR0B = 0;// same for TCCR0B
-  TCNT0  = 0;//initialize counter value to 0
-  // set compare match register for 2khz increments
-  OCR0A = 124;// = (16*10^6) / (2000*64) - 1 (must be <256)
-  // turn on CTC mode
-  TCCR0A |= (1 << WGM01);
-  // Set CS01 and CS00 bits for 64 prescaler
-  TCCR0B |= (1 << CS01) | (1 << CS00);   
-  // enable timer compare interrupt
-  TIMSK0 |= (1 << OCIE0A);
+////set timer0 interrupt at 2kHz
+//  TCCR0A = 0;// set entire TCCR0A register to 0
+//  TCCR0B = 0;// same for TCCR0B
+//  TCNT0  = 0;//initialize counter value to 0
+//  // set compare match register for 2khz increments
+//  OCR0A = 124;// = (16*10^6) / (2000*64) - 1 (must be <256)
+//  // turn on CTC mode
+//  TCCR0A |= (1 << WGM01);
+//  // Set CS01 and CS00 bits for 64 prescaler
+//  TCCR0B |= (1 << CS01) | (1 << CS00);   
+//  // enable timer compare interrupt
+//  TIMSK0 |= (1 << OCIE0A);
 
 //set timer1 interrupt at 1Hz
   TCCR1A = 0;// set entire TCCR1A register to 0
@@ -65,18 +65,18 @@ cli();//stop interrupts
   // enable timer compare interrupt
   TIMSK1 |= (1 << OCIE1A);
 
-//set timer2 interrupt at 8kHz
-  TCCR2A = 0;// set entire TCCR2A register to 0
-  TCCR2B = 0;// same for TCCR2B
-  TCNT2  = 0;//initialize counter value to 0
-  // set compare match register for 8khz increments
-  OCR2A = 249;// = (16*10^6) / (8000*8) - 1 (must be <256)
-  // turn on CTC mode
-  TCCR2A |= (1 << WGM21);
-  // Set CS21 bit for 8 prescaler
-  TCCR2B |= (1 << CS21);   
-  // enable timer compare interrupt
-  TIMSK2 |= (1 << OCIE2A);
+////set timer2 interrupt at 8kHz
+//  TCCR2A = 0;// set entire TCCR2A register to 0
+//  TCCR2B = 0;// same for TCCR2B
+//  TCNT2  = 0;//initialize counter value to 0
+//  // set compare match register for 8khz increments
+//  OCR2A = 249;// = (16*10^6) / (8000*8) - 1 (must be <256)
+//  // turn on CTC mode
+//  TCCR2A |= (1 << WGM21);
+//  // Set CS21 bit for 8 prescaler
+//  TCCR2B |= (1 << CS21);   
+//  // enable timer compare interrupt
+//  TIMSK2 |= (1 << OCIE2A);
 
 
 sei();//allow interrupts
@@ -98,7 +98,7 @@ void loop() {
   int button1 = digitalRead(buttonPin1);
   if (button1) return;
   
-//  analogWrite(6, waveformsTable[wave1][i]);  // write the selected waveform
+  writeByte(waveformsTable[wave1][i]);
 
   i++;
   if(i == maxSamplesNum)  // Reset the counter to repeat the wave
@@ -111,7 +111,7 @@ void loop() {
   }
 
   // write to the digital pins  
-  writeByte(counter);
+  //writeByte(counter);
 }
 
 // function hooked to the interrupt on digital pin 3
