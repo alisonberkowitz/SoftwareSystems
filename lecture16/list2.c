@@ -107,7 +107,24 @@ void reverse(Node **head) {
 // element between the first and second elements.
 // Returns 0 if successful, -1 if the index is out of range.
 int insert_by_index(Node **head, int val, int index) {
-    // FILL THIS IN
+    //Node *bump = *head + index;
+    Node *redirect = head[index -1];
+    Node *bump = redirect->next;
+
+    if (bump==NULL) {
+        return -1;
+    }
+    
+    if (bump!=NULL) {
+        Node *new_node = make_node(val, bump);
+        if (index == 0) {
+            *head = new_node;
+        } else {
+            redirect->next = new_node;
+            printf("redirecting to %d\n", redirect->next->val);
+        }
+        return 0;
+    }
     return -1;
 }
 
