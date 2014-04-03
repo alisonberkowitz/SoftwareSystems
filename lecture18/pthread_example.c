@@ -37,7 +37,7 @@ void *entry (void *arg)
   int ret;
 
   /* I put this sleep statement here to force the parent to run first */
-  sleep(1);   
+ // sleep(1);   
 
   /* alternatively, I could use... */
 
@@ -73,6 +73,7 @@ int main ()
     exit (-1);
   }
 
+  sleep(1);
   /* when the parent thread modifies the card, the child sees the change! */
   card->rank = 7;
   printf ("Parent: rank = %d, suit = %d\n", card->rank, card->suit);

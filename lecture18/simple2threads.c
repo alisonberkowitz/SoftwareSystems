@@ -13,8 +13,8 @@ Modified by Allen Downey.
 
 static void *child(void *ignored)
 {
-    sleep(3);
-    printf("Child is done sleeping 3 seconds.\n");
+    sleep(5);
+    printf("Child is done sleeping 5 seconds.\n");
     return NULL;
 }
 
@@ -28,7 +28,8 @@ int main(int argc, char *argv[])
     if (code) {
 	fprintf(stderr, "pthread_create failed with code %d\n", code);
     }
-    sleep(5);
-    printf("Parent is done sleeping 5 seconds.\n");
-    return 0;
+    sleep(3);
+    printf("Parent is done sleeping 3 seconds.\n");
+
+    pthread_exit(NULL);
 }
