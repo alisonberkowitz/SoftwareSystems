@@ -30,9 +30,13 @@ void print_list(GList *list){
 }
 
 void parse (FILE *in_file) {
-	int c;
+	char c;
+	char name[45]; //length of the longest english word
+	int i = 0;
+    int count = 0;
 	int found_word = 0;
 	GList* list = NULL;
+    GList* l = NULL;
 
 	while ((c =fgetc(in_file)) != EOF ) {
         //if it's an alpha, convert it to lower case
@@ -40,37 +44,42 @@ void parse (FILE *in_file) {
         {
             found_word = 1;
             c = tolower(c);
-            char p = putchar(c);
-            Word *first = make_word(strdup(&p), 0);
-            list = g_list_append(list, first);
-            //putchar(c);
+            name[i] = c;
+            i++;
         }
         else {
             if (found_word) {
-                // putchar('\n');
+            	name[i] ='\0';
+                for (l = list; l != NULL; l = l->next) {
+                    if (strcmp(((Word*)l->data)->name, name)==0) {
+                        ((Word*)l->data)->occurances++;
+                        count++;
+                    }
+                }
+
+                if (count == 0) {
+                    Word *first = make_word(strdup(name), 1);
+                    list = g_list_append(list, first);
+                } else {
+                    count = 0;
+                }
+
+                i = 0;
                 found_word=0;
+                name[0] = '\0';
             }
         }
 	}
 	print_list(list);
+    g_list_foreach(list, (GFunc)g_free, NULL);
+    g_list_free(list);
 }
 
 int main(int argc, char** argv) {
 	FILE *in_file = fopen("paragraph.txt", "r");
 
 	parse(in_file);
-	
- 	GList* list = NULL;
 
- 	Word *first = make_word("Hello", 0);
- 	Word *second = make_word("World", 0);
- 	list = g_list_append(list, first);
- 	list = g_list_append(list, second);
-
- 	print_list(list);
-
- 	g_list_foreach(list, (GFunc)g_free, NULL);
- 	g_list_free(list);
  	fclose(in_file);
 
 	return 0;
