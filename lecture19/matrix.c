@@ -24,15 +24,13 @@ Matrix *make_matrix(int rows, int cols) {
         exit (-1);
     }
 
-    int i,j;
+    int i;
     mat->rows = rows;
     mat->cols = cols;
     mat->data = malloc(rows * cols * sizeof(double *));
 
     for (i=0;i<mat->rows;i++) {
-        for (j=0; j<mat->cols; j++) {
-            mat->data[i][j]=0;
-        }
+        mat->data[i] = calloc(mat->cols, sizeof(double));
     }
     return mat;
 }
@@ -99,12 +97,26 @@ void mult_matrix(Matrix *A, Matrix *B, Matrix *C) {
     // Fill this in
     // Note that it is asking for matrix multiplication, not
     // elementwise multiplication
+    int i, j, k;
+    int num = 0;
+
+    assert(A->rows == B->cols && A->rows == C->rows);
+    assert(A->cols == B->rows && B->cols == C->cols);
+
+    for (i=0; i<A->rows; i++) {
+        for (j=0; j<A->cols; j++) {
+            for (k=0; k<A->rows; k++) {
+                C->data[i][j] += A->data[i][k]*B->data[k][j];
+            }
+        }
+    }
 }
 
 // Performs matrix multiplication and returns a new matrix.
 Matrix *mult_matrix_func(Matrix *A, Matrix *B) {
-    // Fill this in
-    return NULL;
+    Matrix *C = make_matrix(A->rows, B->cols);
+    mult_matrix(A,B,C);
+    return C;
 }
 
 int main() {
@@ -113,16 +125,16 @@ int main() {
     printf("A\n");
     print_matrix(A);
 
-    // Matrix *C = add_matrix_func(A, A);
-    // printf("A + A\n");
-    // print_matrix(C);
+    Matrix *C = add_matrix_func(A, A);
+    printf("A + A\n");
+    print_matrix(C);
 
-    // Matrix *B = make_matrix(4, 3);
-    // increment_matrix(B, 1);
-    // printf("B\n");
-    // print_matrix(B);
+    Matrix *B = make_matrix(4, 3);
+    increment_matrix(B, 1);
+    printf("B\n");
+    print_matrix(B);
 
-    // Matrix *D = mult_matrix_func(A, B);
-    // printf("D\n");
-    // print_matrix(D);
+    Matrix *D = mult_matrix_func(A, B);
+    printf("D\n");
+    print_matrix(D);
 }
