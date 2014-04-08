@@ -18,8 +18,23 @@ typedef struct {
 
 // Makes a new matrix and sets all elements to zero.
 Matrix *make_matrix(int rows, int cols) {
-    // Fill this in
-    return NULL;
+    Matrix *mat = (Matrix *) malloc (sizeof (Matrix));
+    if (mat == NULL) {
+        perror ("malloc failed");
+        exit (-1);
+    }
+
+    int i,j;
+    mat->rows = rows;
+    mat->cols = cols;
+    mat->data = malloc(rows * cols * sizeof(double *));
+
+    for (i=0;i<mat->rows;i++) {
+        for (j=0; j<mat->cols; j++) {
+            mat->data[i][j]=0;
+        }
+    }
+    return mat;
 }
 
 // Prints the elements of a matrix.
@@ -98,16 +113,16 @@ int main() {
     printf("A\n");
     print_matrix(A);
 
-    Matrix *C = add_matrix_func(A, A);
-    printf("A + A\n");
-    print_matrix(C);
+    // Matrix *C = add_matrix_func(A, A);
+    // printf("A + A\n");
+    // print_matrix(C);
 
-    Matrix *B = make_matrix(4, 3);
-    increment_matrix(B, 1);
-    printf("B\n");
-    print_matrix(B);
+    // Matrix *B = make_matrix(4, 3);
+    // increment_matrix(B, 1);
+    // printf("B\n");
+    // print_matrix(B);
 
-    Matrix *D = mult_matrix_func(A, B);
-    printf("D\n");
-    print_matrix(D);
+    // Matrix *D = mult_matrix_func(A, B);
+    // printf("D\n");
+    // print_matrix(D);
 }
