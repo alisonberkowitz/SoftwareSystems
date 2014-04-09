@@ -155,6 +155,46 @@ double *row_sum(Matrix *A) {
     return res;
 }
 
+// Adds up the columns of A and returns a heap-allocated array of doubles.
+double *col_sum(Matrix *A) {
+    double total;
+    int i, j;
+
+    double *res = malloc(A->cols * sizeof(double));
+
+    for (j=0; j<A->cols; j++) {
+        total = 0.0;
+        for (i=0; i<A->rows; i++) {
+            total += A->data[i][j];
+        }
+        res[j] = total;
+    }
+
+    return res;
+}
+
+// Adds up the diagonals of A and returns a heap-allocated array of doubles.
+double *diags_sum(Matrix *A) {
+    double total = 0.0;
+    int i, j;
+
+    double *res = malloc(2 * sizeof(double));
+
+    for (i=0; i<A->rows; i++) {
+        total += A->data[i][i];
+    }
+    res[0] = total; //forward diagonal
+
+    total = 0.0;
+
+    for (i=0, j=A->cols -1; i<A->rows, j >=0; i++, j--) {
+        total += A->data[i][j];
+    }
+    res[1] = total; //backward diagonal
+
+    return res;
+}
+
 /* 
    http://en.wikipedia.org/wiki/Magic_square
 
@@ -168,6 +208,33 @@ double *row_sum(Matrix *A) {
 
    Feel free to use row_sum().
 */
+int is_magic_square(Matrix *mat) {
+    int i, j;
+    double *rowsums = row_sum(mat);
+    double *colsums = col_sum(mat);
+    double *diagsums = diags_sum(mat);
+
+    if (rowsums[0]!=colsums[0]) {
+        return 0;
+    }
+
+    if (diagsums[0]!=diagsums[1]) {
+        return 0;
+    }
+
+    for (i=0; i<mat->rows; i++) {
+        if (rowsums[i] == rowsums[0]) {
+            for (j=0; j<mat->cols; j++) {
+                if (colsums[j] == colsums[0]) {
+                    if (diagsums[0] == rowsums[0]) {
+                        return 1;
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
 
 
 int main() {
@@ -202,6 +269,17 @@ int main() {
 	printf("row %d\t%lf\n", i, sums[i]);
     }
     // should print 6, 22, 38
+
+    // double *colsums = col_sum(A);
+    // for (i=0; i<A->cols; i++) {
+    // printf("column %d\t%lf\n", i, colsums[i]);
+    // }
+
+    Matrix *S = make_matrix(3, 3);
+    increment_matrix(S, 1);
+    printf("S\n");
+    print_matrix(S);
+    assert(is_magic_square(S));
 
     return 0;
 }
