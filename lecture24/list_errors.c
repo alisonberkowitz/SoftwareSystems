@@ -154,7 +154,8 @@ int main() {
 
     // make an empty list
     printf("empty\n");
-    Node *empty = NULL;
+    //Node *empty = NULL;
+    Node *empty = malloc(sizeof(Node));
 
     // add an element to the empty list
     insert_by_index(&empty, 1, 0);

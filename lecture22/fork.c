@@ -7,6 +7,8 @@
 #include <sys/types.h>
 #include <wait.h>
 
+int x = 8;
+
 // errno is an external global variable that contains
 // error information
 extern int errno;
@@ -25,6 +27,8 @@ void child_code(int i)
 {
   sleep (i);
   printf ("Hello from child %d.\n", i);
+  x = 5;
+  printf("x: %d\n", x);
   exit (i);
 }
 
@@ -84,6 +88,9 @@ int main (int argc, char *argv[])
     status = WEXITSTATUS (status);
     printf ("Child %d exited with error code %d.\n", pid, status);
   }
+
+  printf("x: %d\n", x);
+
   // compute the elapsed time
   stop = get_seconds ();
   printf ("Elapsed time = %f seconds.\n", stop - start);

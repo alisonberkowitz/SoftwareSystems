@@ -106,8 +106,9 @@ int main (int argc, char** argv)
 
 	array = g_strsplit(line, " ", 0);
 	for (i=0; array[i] != NULL; i++) {
-	    incr(hash, array[i]);
+	    incr(hash, g_strdup(array[i]));
 	}
+    g_strfreev(array);
     }
     fclose (fp);
 
