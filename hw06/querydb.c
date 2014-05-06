@@ -1,3 +1,9 @@
+/*
+Copyright 2014 Alison Berkowitz and Hayley Hansson
+This program allows the user to query the database to find a sparring partner of the same gender and weight class from the command line.
+When run, the program request the user's first and last name, and prints the information of everyone with the correct criteria.
+*/
+
 #include <my_global.h>
 #include <mysql.h>
 #include <unistd.h>
