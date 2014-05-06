@@ -22,17 +22,17 @@ int main(int argc, char **argv)
   puts("Enter LastName: ");
   scanf("%254s", LastName);
 
-  char Sex[2];
+  char Sex[3];
   puts("M/F?: ");
-  scanf("%1s", Sex);
+  scanf("%2s", Sex);
 
-  char Age[4];
+  char Age[5];
   puts("Enter Age: ");
-  scanf("%3s", Age);
+  scanf("%4s", Age);
 
   char Weight[50];
   puts("Enter Weight Class: ");
-  scanf("%49s", Weight);
+  scanf(" %[^\n]s", Weight);
 
   char Bouts[4];
   puts("Number of Bouts: ");
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
       finish_with_error(con);
   }    
 
-  char prefix[1000] = "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('";
+  char prefix[1500] = "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('";
   strcat(prefix, FirstName);
   strcat(prefix, "', '");
   strcat(prefix, LastName);
