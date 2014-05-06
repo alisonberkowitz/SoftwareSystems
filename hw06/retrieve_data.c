@@ -1,3 +1,9 @@
+/*
+    Copyright 2014 Alison Berkowitz and Hayley Hansson
+    Display all rows in Boxers table in boxerdb database.
+    This program is only run for debugging purposes.
+*/
+
 #include <my_global.h>
 #include <mysql.h>
 
