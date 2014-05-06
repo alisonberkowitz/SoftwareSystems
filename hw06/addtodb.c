@@ -1,3 +1,8 @@
+/* 
+  Copyright 2014 Alison Berkowitz and Hayley Hansson
+  This function allows the user to add a boxer and their information to the database from the command line.
+  It will run everytime a new user adds themself.
+*/
 #include <my_global.h>
 #include <mysql.h>
 #include <unistd.h>
