@@ -7,6 +7,9 @@ populatedb: populatedb.c
 addtodb: addtodb.c
 	gcc addtodb.c -o addtodb -std=c99  `mysql_config --cflags --libs`
 
+querydb: querydb.c
+	gcc querydb.c -o querydb -std=c99  `mysql_config --cflags --libs`
+
 retrieve_data: retrieve_data.c
 	gcc retrieve_data.c -o retrieve_data -std=c99  `mysql_config --cflags --libs`
 

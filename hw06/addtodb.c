@@ -30,9 +30,9 @@ int main(int argc, char **argv)
   puts("Enter Age: ");
   scanf("%3s", Age);
 
-  char Weight[4];
-  puts("Enter Weight: ");
-  scanf("%3s", Weight);
+  char Weight[50];
+  puts("Enter Weight Class: ");
+  scanf("%49s", Weight);
 
   char Bouts[4];
   puts("Number of Bouts: ");

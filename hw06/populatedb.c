@@ -28,47 +28,47 @@ int main(int argc, char **argv)
       finish_with_error(con);
   }
   
-  if (mysql_query(con, "CREATE TABLE Boxers(Id INT PRIMARY KEY AUTO_INCREMENT, FirstName varchar(255) NOT NULL, LastName varchar(255) NOT NULL, Sex varchar(2) NOT NULL, Age INT NOT NULL, Weight INT NOT NULL, Bouts INT NOT NULL)")) {      
+  if (mysql_query(con, "CREATE TABLE Boxers(Id INT PRIMARY KEY AUTO_INCREMENT, FirstName varchar(255) NOT NULL, LastName varchar(255) NOT NULL, Sex varchar(2) NOT NULL, Age INT NOT NULL, Weight varchar(50) NOT NULL, Bouts INT NOT NULL)")) {      
       finish_with_error(con);
   }
   
-  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Hayley', 'Hansson', 'F', 20, 145, 2)")) {
+  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Hayley', 'Hansson', 'F', 20, 'Super Lightweight', 2)")) {
       finish_with_error(con);
   }
   
-  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Alison', 'Berkowitz', 'F', 19, 130, 3)")) {
+  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Alison', 'Berkowitz', 'F', 19, 'Lightweight', 3)")) {
       finish_with_error(con);
   }
 
-  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Ben', 'Kahle', 'M', 20, 185, 8)")) {
+  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Ben', 'Kahle', 'M', 20, 'Cruiserweight', 8)")) {
       finish_with_error(con);
   }
   
-  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Abe', 'Levitan', 'M', 20, 145, 7)")) {
+  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Abe', 'Levitan', 'M', 20, 'Welterweight', 7)")) {
       finish_with_error(con);
   }
 
-  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Cory', 'Dolphin', 'M', 21, 207, 8)")) {
+  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Cory', 'Dolphin', 'M', 21, 'Heavyweight', 8)")) {
       finish_with_error(con);
   }
 
-  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Dan', 'Kearney', 'M', 21, 165, 6)")) {
+  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Dan', 'Kearney', 'M', 21, 'Super Middleweight', 6)")) {
       finish_with_error(con);
   }
 
-  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Evan', 'Dorsky', 'M', 20, 120, 7)")) {
+  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Evan', 'Dorsky', 'M', 20, 'Super Bantamweight', 7)")) {
       finish_with_error(con);
   }
 
-  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Forest', 'Bourke', 'M', 19, 135, 2)")) {
+  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Forest', 'Bourke', 'M', 19, 'Lightweight', 2)")) {
       finish_with_error(con);
   }
 
-  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Erin', 'Pierce', 'F', 19, 110, 4)")) {
+  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Erin', 'Pierce', 'F', 19, 'Flyweight', 4)")) {
       finish_with_error(con);
   }
 
-  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Adam', 'Coppola', 'M', 20, 145, 2)")) {
+  if (mysql_query(con, "INSERT INTO Boxers(FirstName, LastName, Sex, Age, Weight, Bouts) VALUES('Adam', 'Coppola', 'M', 20, 'Welterweight', 2)")) {
       finish_with_error(con);
   }
 
