@@ -1,3 +1,9 @@
+/*
+    Copyright 2014 Alison Berkowitz and Hayley Hansson
+    Create a table inside the database and populate the table with ten initial rows.
+    This program is only run once at the initial set up of the system.
+*/
+
 #include <my_global.h>
 #include <mysql.h>
 

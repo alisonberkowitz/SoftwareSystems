@@ -1,3 +1,9 @@
+/*
+    Copyright 2014 Alison Berkowitz and Hayley Hansson
+    Initiate a MySQL connection and create boxerdb database.
+    This program is only run once at the initial set up of the system.
+*/
+
 #include <my_global.h>
 #include <mysql.h>
 
